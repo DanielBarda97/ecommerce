@@ -12,7 +12,7 @@ const addOrderItems = asyncHandler(async(req, res) => {
     throw new Error('No order items')
     return
   } else {
-    const otder = new Order({
+    const order = new Order({
       orderItems, 
       user: req.user._id,
       shippingAddress, 
@@ -22,11 +22,24 @@ const addOrderItems = asyncHandler(async(req, res) => {
       shippingPrice, 
       totalPrice
     })
+    const createdOrder = await order.save()
+    res.status(201).json(createdOrder)
   }
-
-  const createdOrder = await order.save()
-
-  res.status(201).json(createdOrder)
 })
 
-export {addOrderItems}
+// @desc    Get order by id
+// @route   GET /api/orders/:id
+// @access  Private 
+const getOrderById = asyncHandler(async(req, res) => {
+  const otder = await Order.findById(req.params.id).populate('user', 'name email')
+
+  if(order) {
+    res.json(order)
+  } else {
+    res.status(404)
+    throw new Error('Prder not found')
+  }
+  
+})
+
+export {addOrderItems, getOrderById}

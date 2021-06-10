@@ -6,9 +6,9 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import { addToCart, removeFromCart } from '../action/cartActions'
 
 const CartScreen = ({ match, location, history }) => {
-  const productId = match.params.id
+  // const productId = match.params.id
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  // const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
   const dispatch = useDispatch()
   
@@ -18,11 +18,11 @@ const CartScreen = ({ match, location, history }) => {
   console.log(cartItems);
   
 
-  useEffect (()=>{
-    if(productId) {
-      dispatch(addToCart(productId, qty))
-    }
-  }, [dispatch, productId, qty])
+  // useEffect (()=>{
+  //   if(productId) {
+  //     dispatch(addToCart(productId, qty))
+  //   }
+  // }, [dispatch, productId, qty])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))

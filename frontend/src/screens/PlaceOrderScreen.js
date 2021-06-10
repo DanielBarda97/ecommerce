@@ -26,14 +26,13 @@ const PlaceOrderScreen = ({ history }) => {
     ).toFixed(2)
 
     const orderCreate = useSelector(state => state.orderCreate)
-    // eslint-disable-next-line
-    const { order, success, error} = orderCreate
+    const { order, success, error } = orderCreate
 
     useEffect(() => {
       if(success) {
         history.push(`/order/${order._id}`)
       }
-      // eslint-disable-next-line
+    // eslint-disable-next-line
     },[history, success])
 
   const plcaeOrderHandler = () => {
