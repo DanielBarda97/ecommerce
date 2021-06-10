@@ -10,7 +10,7 @@ const addOrderItems = asyncHandler(async(req, res) => {
   if(orderItems && orderItems.length === 0) {
     res.status(400)
     throw new Error('No order items')
-    return
+    // return
   } else {
     const order = new Order({
       orderItems, 
@@ -31,7 +31,7 @@ const addOrderItems = asyncHandler(async(req, res) => {
 // @route   GET /api/orders/:id
 // @access  Private 
 const getOrderById = asyncHandler(async(req, res) => {
-  const otder = await Order.findById(req.params.id).populate('user', 'name email')
+  const order = await Order.findById(req.params.id).populate('user', 'name email')
 
   if(order) {
     res.json(order)

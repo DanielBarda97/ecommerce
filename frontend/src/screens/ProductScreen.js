@@ -6,7 +6,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import Rating from '../components/Rating'
 import { listProductsDetails } from '../action/productAction'
-import { addToCart } from '../action/cartActions'
+// import { addToCart } from '../action/cartActions'
 
 
 const ProductScreen = ({ history, match }) => {
@@ -21,14 +21,14 @@ const ProductScreen = ({ history, match }) => {
     dispatch(listProductsDetails(match.params.id))
   },[dispatch, match])
   
-  // const addToCartHandler = () => {
-  //   history.push(`/cart/${match.params.id}?qty=${qty}`)
-  // }
-
   const addToCartHandler = () => {
-    dispatch(addToCart(product._id, qty))
-    history.push('/cart')
+    history.push(`/cart/${match.params.id}?qty=${qty}`)
   }
+
+  // const addToCartHandler = () => {
+  //   dispatch(addToCart(product._id, qty))
+  //   history.push('/cart')
+  // }
 
   return (
     <>
