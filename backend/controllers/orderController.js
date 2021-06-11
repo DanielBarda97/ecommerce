@@ -13,14 +13,14 @@ const addOrderItems = asyncHandler(async(req, res) => {
     // return
   } else {
     const order = new Order({
-      orderItems, 
+      orderItems,
       user: req.user._id,
-      shippingAddress, 
-      paymentMethod, 
-      itemsPrice, 
-      taxPrice, 
-      shippingPrice, 
-      totalPrice
+      shippingAddress,
+      paymentMethod,
+      itemsPrice,
+      taxPrice,
+      shippingPrice,
+      totalPrice,
     })
     const createdOrder = await order.save()
     res.status(201).json(createdOrder)

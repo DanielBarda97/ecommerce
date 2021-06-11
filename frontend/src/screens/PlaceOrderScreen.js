@@ -38,7 +38,7 @@ const PlaceOrderScreen = ({ history }) => {
   const plcaeOrderHandler = () => {
     dispatch(createOrder({
       orderItems: cart.cartItems,
-      shippigAddress: cart.shippigAddress,
+      shippingAddress: cart.shippingAddress,
       paymentMethod: cart.paymentMethod,
       itemsPrice: cart.itemsPrice,
       shippigPrice: cart.shippigPrice,
@@ -46,7 +46,6 @@ const PlaceOrderScreen = ({ history }) => {
       totalPrice: cart.totalPrice
     }))
   }
-
   return (
     <>
       <CheckoutSteps step1 step2 step3 step4 />
