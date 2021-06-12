@@ -32,3 +32,8 @@ strong {
   text-align: center;
   line-height: 2.5;
 }
+
+.usersList td {
+  text-align: center;
+  line-height: 2.4;
+}
