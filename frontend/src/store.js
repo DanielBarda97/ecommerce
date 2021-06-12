@@ -33,8 +33,8 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer
 })
 
-const cartItemFromStore = localStorage.getItem('cartItem') 
-? JSON.parse(localStorage.getItem('cartItem')) 
+const cartItemFromStore = localStorage.getItem('cartItems') 
+? JSON.parse(localStorage.getItem('cartItems')) 
 : []
 
 const userInfoFromStore = localStorage.getItem('userInfo') 
