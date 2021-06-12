@@ -27,3 +27,8 @@ h2 {
 strong {
   font-weight: bold;
 }
+
+.myOrders td {
+  text-align: center;
+  line-height: 2.5;
+}
