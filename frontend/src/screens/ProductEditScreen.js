@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
@@ -18,6 +19,7 @@ const ProductEditScreen = ({ match, history }) => {
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
+  const [uploading, setUploading] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -51,6 +53,29 @@ const ProductEditScreen = ({ match, history }) => {
     
   }, [dispatch, history, productId, product, successUpdate])
 
+  const  uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+
+    try{
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      setImage(data)
+      setUploading(false)
+    } catch(error){
+      console.log(error)
+      setUploading(false)
+    }
+  }
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(updateProduct({
@@ -77,7 +102,7 @@ const ProductEditScreen = ({ match, history }) => {
         {loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message> : (
           <Form onSubmit={submitHandler}>
           <Row>
-            <Form.Group controlId='name' as={Col} lg={6}>
+            <Form.Group controlId='name' as={Col} lg={7}>
               <Form.Label>Product Name</Form.Label>
               <Form.Control 
               type='name' 
@@ -87,19 +112,19 @@ const ProductEditScreen = ({ match, history }) => {
               className='border'>
               </Form.Control>
             </Form.Group>
-
-            <Form.Group controlId='price' as={Col} lg={6}>
-              <Form.Label>Price</Form.Label>
+            
+            <Form.Group controlId='category' as={Col} lg={5}>
+              <Form.Label>Category</Form.Label>
               <Form.Control 
-              type='number' 
-              placeholder='Enter product price' 
-              value={price} 
-              onChange={(e)=>setPrice(e.target.value)}
+              type='text' 
+              placeholder='Enter category' 
+              value={category} 
+              onChange={(e)=>setCategory(e.target.value)}
               className='border'>
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='image' as={Col} lg={6}>
+            <Form.Group controlId='image' as={Col} lg={7}>
               <Form.Label>Image</Form.Label>
               <Form.Control 
               type='text' 
@@ -110,7 +135,18 @@ const ProductEditScreen = ({ match, history }) => {
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='brand' as={Col} lg={6}>
+            <Form.Group controlId='image-file' as={Col} lg={5}>
+              <Form.Label>Upload Image</Form.Label>
+              <Form.File 
+              id="image-file"
+              hidden
+              onChange={uploadFileHandler}
+              />
+              <Form.Label className="btn btn-dark" style={{width:"100%"}}>Choose Image</Form.Label>
+              {uploading && <Loader />}
+            </Form.Group>
+
+            <Form.Group controlId='brand' as={Col} lg={5}>
               <Form.Label>Brand</Form.Label>
               <Form.Control 
               type='text' 
@@ -121,24 +157,24 @@ const ProductEditScreen = ({ match, history }) => {
               </Form.Control>
             </Form.Group>
 
-            <Form.Group controlId='countInStock' as={Col} lg={6}>
-              <Form.Label>Count In Stock</Form.Label>
+            <Form.Group controlId='price' as={Col} lg={4}>
+              <Form.Label>Price</Form.Label>
+              <Form.Control 
+              type='number' 
+              placeholder='Enter product price' 
+              value={price} 
+              onChange={(e)=>setPrice(e.target.value)}
+              className='border'>
+              </Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='countInStock' as={Col} lg={3}>
+              <Form.Label>In Stock</Form.Label>
               <Form.Control 
               type='number' 
               placeholder='Enter count in stock' 
               value={countInStock} 
               onChange={(e)=>setCountInStock(e.target.value)}
-              className='border'>
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId='category' as={Col} lg={6}>
-              <Form.Label>Category</Form.Label>
-              <Form.Control 
-              type='text' 
-              placeholder='Enter category' 
-              value={category} 
-              onChange={(e)=>setCategory(e.target.value)}
               className='border'>
               </Form.Control>
             </Form.Group>
