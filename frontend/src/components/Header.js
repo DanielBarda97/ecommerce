@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
-import { logout } from '../action/userActions'
+import { logout } from '../actions/userActions'
 
 const Header = () => {
   const dispatch = useDispatch()
