@@ -107,7 +107,7 @@ const ProductListScreen = ({ history, match }) => {
                   </Button>
               </td>
             </tr>
-          ))}
+          )).reverse()}
         </tbody>
       </Table>
     )}

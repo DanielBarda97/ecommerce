@@ -172,7 +172,7 @@ const ProductScreen = ({ history, match }) => {
               <p>{review.createdAt.substring(0, 10)}</p>
               <p>{review.comment}</p>
             </ListGroup.Item>
-          ))}
+          )).reverse()}
       </Col>
     </Row>
     </>
