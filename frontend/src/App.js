@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'react-bootstrap'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
@@ -43,6 +45,7 @@ const App = () => {
         </Container>
       </main>
       <Footer />
+      <ToastContainer position="bottom-right" autoClose={2000}/>
     </ Router>
   );
 }
